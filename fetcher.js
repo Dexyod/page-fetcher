@@ -9,10 +9,11 @@ args = process.argv.slice(2);
 
 request(args[0], (error, response, body) => {
   if (error) {
-    console.log("error:", error); // Print the error if one occurred
+    return "error:", error; // Print the error if one occurred
   }
-
-  console.log("statusCode:", response && response.statusCode);
+  if (response.statusCode !== 200) {
+    return "statusCode:", response && response.statusCode;
+  }
 
   fs.writeFile(args[1], body, (err) => {
     if (err) {
